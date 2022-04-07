@@ -1,6 +1,6 @@
-//window.addEventListener('DOMContentLoaded', (event) => {
-//    getVisitCount();
-//});
+window.addEventListener('DOMContentLoaded', (event) => {
+    getVisitCount();
+});
 
 const functionApi = 'https://crcgetcounter.azurewebsites.net/api/crcgetcounter?code=rtxnwdfHhYnQFveV7JmqCYGHe3NONaQe33VIWg5c5Egdyl8p/YxRTQ==';
 
@@ -19,5 +19,3 @@ const getVisitCount = () => {
       });
     return count;
 }
-
-getVisitCount();
