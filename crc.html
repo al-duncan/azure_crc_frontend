@@ -26,9 +26,8 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#challenge">The Challenege</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#certification">Part 1: Certification</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#frontend">Part 2: The Front End</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#backend">Part 3: The Back End</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#frontend">The Front End</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#backend">The Back End</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#thoughts">Final Thoughts</a></li>
                 </ul>
             </div>
@@ -38,35 +37,27 @@
             <!-- Challenge-->
             <section class="resume-section" id="challenge">
                 <div class="resume-section-content">
-                    <h1 class="mb-0">
+                    <h1 class="mb-5">
                         The Azure Cloud Resume
                         <span class="text-primary">Challenge</span>
                     </h1>
-                    <p class="lead mb-5">How I came across it, what it is and why I'm doing it</p>
-                    <p class="lead mb-5"><a href="index.html">Link back to resume</a></p>
-                </div>
-            </section>
-            <hr class="m-0" />
-            <!-- Certification-->
-            <section class="resume-section" id="certification">
-                <div class="resume-section-content">
-                    <h2 class="mb-5">Part 1: Certification</h2>
-                    <div class="subheading mb-3">Steps 1 of 16</div>
-                    <p class="lead mb-5">What's involved and how I got ready for it... the exam experience...</p>
-                    <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="3fa47251-b87f-4c86-9217-c5ee73ccf447" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+                    <p>I was recently recommended Forrest Brazeal’s <a href="https://cloudresumechallenge.dev/docs/the-challenge/azure/">Cloud Resume Challenge</a> after a discussion with a friend about how to get some hands on experience in the Microsoft Azure cloud environment. For those of you unfamiliar with the challenge Forrest describes it as “hands-on project designed to help you bridge the gap from cloud certification to cloud job. It incorporates many of the skills that real cloud and DevOps engineers use in their daily work.”</p>
+                    <p>The challenge essentially is to build and host a resume website with a visitor counter in the cloud and gain your first cloud platform certification. That sounds simple on the surface but the design of the challenge requires you to use multiple Azure services (CDN, Function App, Azure Cosmos DB etc..), configure DNS for your custom domain, write some python code and implement CI/CD using GitHub. The following diagram shows how it all works together.</p>
+                    <img class="img-fluid mx-auto" src="assets/img/azure-crc.png" alt="..." />
                 </div>
             </section>
             <hr class="m-0" />
             <!-- Front End-->
             <section class="resume-section" id="frontend">
                 <div class="resume-section-content">
-                    <h2 class="mb-5">Part 2: The Front End</h2>
-                    <div class="subheading mb-3">Steps 2-6, 13 & 15</div>
-                    <p>link to front end repository</p>
-                    <p>First time using the Azure portal interface, setting up Blob storage and uploading a "Hello World" page.</p>
-                    <p>Setting up the CDN for https and custom domain</p>
-                    <p>Git Hub and github actions for CI/CD</p>
-                    <p>dropping in the template and adding the content</p>
+                    <h2 class="mb-5">The Front End</h2>
+                    <p>Before reading on you can view my finished resume page <a href="https://azure-crc.theduncans.uk">here</a> and the repository for the front end can be found <a href="https://github.com/al-duncan/azure_crc_frontend">here</a></p>
+                    <p>As you will see for my resume I am pretty comfortable building websites so the thing I was most excited about was finally getting to build something in Azure. I quickly put together a “Hello World!” HTML file and put it to one side so that I could get on with making everything work.</p>
+                    <p>I then logged into the Azure portal and once I had my Subscription and Resource Group created I set about configuring a storage account and enabling the static website. When you enable the static website on the blob storage service a storage container ($web) is created for you to host the static site content. I uploaded the HTML file I’d created earlier into the $web container using the portal interface and when I pointed my web browser at the Primary Endpoint for the Static Web container I saw my “Hello World!” message. Everything is working so far…</p>
+                    <p>Next step was setup a custom domain and have the site use HTTPS which required using Azure CDN. I setup the CDN through the Azure Portal and configured it to ForceHTTPS. I already had a domain that I could use so I headed over to my domain host and created a CNAME record to point to the CDN Endpoint Hostname. Again a quick check in my browser and I could see the “Hello World!” page and my browser also confirmed it was using HTTPS on the custom domain.</p>
+                    <p>Last step for getting the front end working was to create a GutHub repository and use GitHub Actions for CI/CD. Although I’m relatively familiar with using GitHub I’d never used it’s Actions before. First I setup a repository on GitHub, cloned it to my local machine, dropped in the “Hello World!” html file and pushed it up the remote repo and made sure I could see everything through the GitHub website.</p>
+                    <p>I then went about learning how to use actions for Ci/CD and came across a very helpful walk though on the Microsoft Docs website. Before long I had my GitHub Action up and running so that any time I push a commit from my local repo to the GitHub repo it would then publish the changes to my blob storage and the site would be updated. All that was left now was to drop in a template I liked, make a few changes and add my CV content.</p>
+                    <p>Apart from the Javascript for the counter the front end was now complete but I needed to make a start on the back end before adding the Javascript.</p>
                 </div>
             </section>
             <hr class="m-0" />
@@ -87,7 +78,8 @@
             <section class="resume-section" id="thoughts">
                 <div class="resume-section-content">
                     <h2 class="mb-5">Final Thoughts</h2>
-                    <div class="subheading mb-3">Step 16</div>
+                    <p class="lead">Although you can do it at any point the first step of the challenge is to get your certification. I am not going to go into this much here other than to say that to prepare I used the 6 free online learning paths found on the <a href="https://docs.microsoft.com/en-us/learn/certifications/azure-fundamentals/">Microsoft website here</a>.</p>
+                    <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="3fa47251-b87f-4c86-9217-c5ee73ccf447" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
                     <p>The last part of the challenge is to write a blog post about the challenge</p>
                     <p>what I learned and what I found difficult</p>
                     <p>next steps</p>
