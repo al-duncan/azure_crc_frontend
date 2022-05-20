@@ -25,10 +25,10 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#challenge">The Challenege</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#challenge">The Challenge</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#frontend">The Front End</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#backend">The Back End</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#thoughts">Final Thoughts</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#thoughts">Final Comments</a></li>
                 </ul>
             </div>
         </nav>
@@ -51,12 +51,12 @@
             <section class="resume-section" id="frontend">
                 <div class="resume-section-content">
                     <h2 class="mb-5">The Front End</h2>
-                    <p>Before reading on you can view my finished resume page <a href="https://azure-crc.theduncans.uk">here</a> and the repository for the front end can be found <a href="https://github.com/al-duncan/azure_crc_frontend">here</a></p>
-                    <p>As you will see for my resume I am pretty comfortable building websites so the thing I was most excited about was finally getting to build something in Azure. I quickly put together a “Hello World!” HTML file and put it to one side so that I could get on with making everything work.</p>
+                    <p>Before reading on you can view my finished resume page <a href="https://azure-crc.theduncans.uk">here</a> and the repository for the front end can be found on GitHub <a href="https://github.com/al-duncan/azure_crc_frontend">here</a></p>
+                    <p>As you will see from my resume I am pretty comfortable building websites so the thing I was most excited about was finally getting to build something in Azure. I quickly put together a “Hello World!” HTML file and put it to one side so that I could get on with making everything work.</p>
                     <p>I then logged into the Azure portal and once I had my Subscription and Resource Group created I set about configuring a storage account and enabling the static website. When you enable the static website on the blob storage service a storage container ($web) is created for you to host the static site content. I uploaded the HTML file I’d created earlier into the $web container using the portal interface and when I pointed my web browser at the Primary Endpoint for the Static Web container I saw my “Hello World!” message. Everything is working so far…</p>
                     <p>Next step was setup a custom domain and have the site use HTTPS which required using Azure CDN. I setup the CDN through the Azure Portal and configured it to ForceHTTPS. I already had a domain that I could use so I headed over to my domain host and created a CNAME record to point to the CDN Endpoint Hostname. Again a quick check in my browser and I could see the “Hello World!” page and my browser also confirmed it was using HTTPS on the custom domain.</p>
                     <p>Last step for getting the front end working was to create a GutHub repository and use GitHub Actions for CI/CD. Although I’m relatively familiar with using GitHub I’d never used it’s Actions before. First I setup a repository on GitHub, cloned it to my local machine, dropped in the “Hello World!” html file and pushed it up the remote repo and made sure I could see everything through the GitHub website.</p>
-                    <p>I then went about learning how to use actions for Ci/CD and came across a very helpful walk though on the Microsoft Docs website. Before long I had my GitHub Action up and running so that any time I push a commit from my local repo to the GitHub repo it would then publish the changes to my blob storage and the site would be updated. All that was left now was to drop in a template I liked, make a few changes and add my CV content.</p>
+                    <p>I then went about learning how to use actions for CI/CD and came across a very helpful walk though on the Microsoft Docs website. Before long I had my GitHub Action up and running so that any time I push a commit from my local repo to the GitHub repo it would then publish the changes to my blob storage and the site would be updated. All that was left now was to drop in a template I liked, make a few changes and add my CV content.</p>
                     <p>Apart from the Javascript for the counter the front end was now complete but I needed to make a start on the back end before adding the Javascript.</p>
                 </div>
             </section>
@@ -64,25 +64,24 @@
             <!-- Back End-->
             <section class="resume-section" id="backend">
                 <div class="resume-section-content">
-                    <h2 class="mb-5">Part 3: The Back End</h2>
-                    <div class="subheading mb-3">Steps 7-14</div>
-                    <p>link to back end repository</p>
-                    <p>using the command line instead of the portal</p>
-                    <p>Starting from the middle, get the funtion working and write some python to return a number</p>
-                    <p>get the javascript to call the function and show the result on the webpage</p>
-                    <p>create the DB CosmosDB tables API, input binding fine but output binding dont allow update so need to use python to update</p>
-                    <p>python test, github, CI/CD</p>
+                    <h2 class="mb-5">The Back End</h2>
+                    <p>The repository for the back end can be found on GitHub <a href="https://github.com/al-duncan/azure_crc_backend">here</a></p>
+                    <p>Up until this point the Azure services I’ve used have been set up and configured through the Azure portal but from this point in the challenge we are to leave the portal behind. In order to do that there were a few things I needed to setup locally.</p>
+                    <p>First I installed the Azure CLI, so that I could use it locally rather than using the cloud shell, along with Azure Functions Core Tools. I then also installed some extensions for VS Code including the Azure Functions extension which was great for quickly debugging my function app inside the development environment.</p>
+                    <p>Once I had everything setup I opened a terminal and created a new function app locally using the HTTP Trigger template and Python 3.9 environment. I then wrote a quick python script that simply returned a random number and ran the function locally to test that it worked. Using the Azure CLI I then created the function app service in Azure and published my local function into Azure. Directing my web browser to the functions URL to test gave me a random number as desired and confirmed the function was working. At this point I jumped ahead a little in the challenge and setup the back end GitHub repository and actions so that I had the CI/CD workflow as I continued to develop the function</p>
+                    <p>At this point I went back to my front end and added some JavaScript that would hit the function and then display the result where I wanted it on the resume page. So I now have a webpage with some JavaScript that makes a request to my Azure function and displays the result on the page, but the result is a random number rather than a count. Time for the last bit of the puzzle, the Azure CosmosDB.</p>
+                    <p>The Azure CosmosDB offers multiple APIs that essentially allow you to treat the CosmosDB like it is another DB technology such as MongoDB, Cassandra etc but Forrest’s original challenge tells us to use the Table API. Using the Azure CLI I created the database using the same storage account that I’d setup for the front end site files. I then created my entity to store the count value. When using the Table API each entity has 3 default fields, ‘PartitionKey’ and ‘RowKey’ are used to index the entities and ‘Timestamp’ records when the entity was last updated. To those I added a field to store the count and set it to zero.</p>
+                    <p>To finally put everything together I headed back to my function and started to create the python script that would get the last count from the DB, increment it, give the result to the JavaScript and update the count field of the entity in the DB. After a few bumps on the way, particularly with the input/output bindings of the function, I got it working and you can see the final working resume <a href="https://azure-crc.theduncans.uk">here</a></p>
                 </div>
             </section>
+            <hr class="m-0" />
             <!-- Final Thoughts-->
             <section class="resume-section" id="thoughts">
                 <div class="resume-section-content">
-                    <h2 class="mb-5">Final Thoughts</h2>
-                    <p class="lead">Although you can do it at any point the first step of the challenge is to get your certification. I am not going to go into this much here other than to say that to prepare I used the 6 free online learning paths found on the <a href="https://docs.microsoft.com/en-us/learn/certifications/azure-fundamentals/">Microsoft website here</a>.</p>
-                    <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="3fa47251-b87f-4c86-9217-c5ee73ccf447" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
-                    <p>The last part of the challenge is to write a blog post about the challenge</p>
-                    <p>what I learned and what I found difficult</p>
-                    <p>next steps</p>
+                    <h2 class="mb-5">Final Comments</h2>
+                    <p>The one part of the challenge I haven’t talked about is the certification. I am not going say too much about it other than that to prepare I used the 6 free online learning paths found on the Microsoft website <a href="https://docs.microsoft.com/en-us/learn/certifications/azure-fundamentals/">here</a>. There are lots of other ways to prepare out there, some involving spending quite a bit of money, but I found reading through the learning paths was sufficient even as someone with no previous Azure experience.</p>
+                    <p>That leads me onto what I think was one of the most surprising aspects of doing this challenge, the breadth, depth and clarity of the <a href="https://docs.microsoft.com/en-us/azure/">Azure documentation</a> on the Microsoft site. Pretty much everything I needed to know was available there, even clear explanations and solutions to a couple of otherwise confusing error messages. I could have linked to many of the docs I used in the relevant sections above but I didn’t as I think a big part of this challenge is about finding, understanding and implementing the relevant docs and information and I didn’t want to take that away from others doing the challenge.</p>
+                    <p>What’s the next steps for me? My goal in starting out this challenge was to find a way into working in the cloud computing field. That is still my goal so I’ll continue my learning by pursuing further certification either another Azure cert or possibly have a look at AWS. Along with that I started to learn Python shortly before starting this challenge so I’ll continue with that too and hope to have some Python projects that I can showcase on my CV soon.</p>
                 </div>
             </section>
         </div>
