@@ -2,7 +2,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     getVisitCount();
 });
 
-const functionApi = 'https://azurecrcapi.azurewebsites.net/api/azurecrcAPI?code=d7umK3A-b0_41e3SqbPz7MExHHDyepyuhN6cU2mxjrQkAzFu5LhQyQ==';
+const functionApi = 'https://azurecrcapi.azurewebsites.net/api/azurecrcAPI?code=hcVUcGgW_INeza_pdttXVNm7BnrapGFh2L6hu9NqLciZAzFuLb4DBg==';
 
 const getVisitCount = () => {
     let count = 30;
